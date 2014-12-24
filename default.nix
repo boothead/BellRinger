@@ -1,10 +1,10 @@
-{ stdenv, ghc, lens, pipes, pipesConcurrency, ghcjsDom, mvc, profunctors, npm, browserify, closurecompiler
+{ stdenv, ghc, oHm, lens, pipes, pipesConcurrency, ghcjsDom, mvc, profunctors, npm, browserify, closurecompiler
 }:
 stdenv.mkDerivation {
   name = "bell-ringer";
   version = "1.0";
   src = ./.;
-  buildInputs = [ ghc ghcjsDom lens pipes pipesConcurrency mvc profunctors npm browserify closurecompiler];
+  buildInputs = [ ghc ghcjsDom oHm lens pipes pipesConcurrency mvc profunctors npm browserify closurecompiler];
   buildPhase = ''
     mkdir -p node_modules
     HOME=$(pwd) npm install
@@ -17,7 +17,6 @@ stdenv.mkDerivation {
           build/vendor.js \
           vendor/*.js \
           src/*.hs \
-          src/Francium/*.hs
   '';
   installPhase = ''
     mkdir -p $out

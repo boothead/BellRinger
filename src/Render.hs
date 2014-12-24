@@ -12,41 +12,12 @@ import Data.Set (Set)
 import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.Lens as Lens
-import Francium.HTML
+import Ohm.HTML
 import Messages
 import Prelude hiding (div,id,span,map)
 import qualified Prelude as P
-import Francium.DOMEvent
-import Component
 import ChatTypes
-
-bootstrapEl :: String -> [HTML] -> HTML
-bootstrapEl cls = with div (classes .= [cls])
-
-bsCol :: Int -> [HTML] -> HTML
-bsCol n = bootstrapEl $ "col-sm-" ++ (show n)
-
-container, row, col3, col6 :: [HTML] -> HTML
-container = bootstrapEl "container"
-row = bootstrapEl "row"
-col3 = bsCol 3
-col6 = bsCol 6
---col9 = bsCol 9
-
-mkButton :: (() -> IO ()) -> HTML -> [String] -> HTML
-mkButton msgAction btnTxt classList = 
-  with button
-    (do
-       classes .= ["button", "btn"] ++ classList
-       onClick $ DOMEvent msgAction)
-    [btnTxt]
            
-embedRenderer :: Renderer subE subM -> Prism' e subE -> Lens' m subM -> Renderer e m
-embedRenderer subRenderer prsm l evt mdl = subRenderer converted focussed
-  where
-    converted = contramap (review prsm) evt 
-    focussed = mdl ^. l
-
 chatStatsRender :: Set Text -> Int -> HTML
 chatStatsRender chatters n =
   row

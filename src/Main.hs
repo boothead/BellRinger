@@ -15,9 +15,9 @@ import Data.Foldable (traverse_)
 import Data.Monoid ((<>))
 import Messages
 import Render
-import Component
+import Ohm.Component
 import ChatTypes
-import SocketIO ( SocketIO, socketIONew, socketIOWaitForConnection, socketIOOpen
+import Ohm.SocketIO ( SocketIO, socketIONew, socketIOWaitForConnection, socketIOOpen
                 , sioSend, sioSend_, sioSub
                 )
 
